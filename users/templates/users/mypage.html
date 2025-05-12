@@ -1,13 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <h1>마이페이지에 오신 것을 환영합니다</h1>
-<h3>age : {{user.profile.age}}세</h3>
-<h3>bio : {{user.profile.bio}}</h3>
-<h2>{{ request.user.username }}님의 글 목록</h2>
+
+<h3>age : {{ user.profile.age }}세</h3>
+<h3>bio : {{ user.profile.bio }}</h3>
+
+<h2>{{ user.username }}님의 글 목록</h2>
+
 <ul>
     {% for post in posts %}
-    <li><a href="{% url 'main:detail' post.id %}">{{ post.title }}</a></li>
+    <li>
+        <h2><a href="{% url 'main:detail' post.id %}">{{ post.title }}</a></h2>
+        <p>{{ post.writer }} | {{ post.pub_date }} | {{ post.weather }}</p>
+        <p>{{ post.content }}</p>
+
+        {% if post.image %}
+        <p><img src="{{ post.image.url }}" alt="이미지" width="150px"></p>
+        {% endif %}
+
+        <p><a href="{% url 'main:detail' post.id %}">자세히 보기</a></p>
+        <hr>
+    </li>
     {% empty %}
     <li>작성한 글이 없습니다.</li>
     {% endfor %}
