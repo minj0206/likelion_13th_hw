@@ -1,7 +1,16 @@
-{% extends 'base.html' %} 
-{% load static %} 
-{% block content %} 
-    <h1>마이페이지에 오신 것을 환영합니다</h1>
-    <h3>age : {{user.profile.age}}세</h3>
-    <h3>bio : {{user.profile.bio}}</h3>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>마이페이지에 오신 것을 환영합니다</h1>
+<h3>age : {{user.profile.age}}세</h3>
+<h3>bio : {{user.profile.bio}}</h3>
+<h2>{{ request.user.username }}님의 글 목록</h2>
+<ul>
+    {% for post in posts %}
+    <li><a href="{% url 'main:detail' post.id %}">{{ post.title }}</a></li>
+    {% empty %}
+    <li>작성한 글이 없습니다.</li>
+    {% endfor %}
+</ul>
+
 {% endblock %}

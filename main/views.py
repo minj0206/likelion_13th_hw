@@ -38,7 +38,7 @@ def edit(request, id):
 def update(request, id):
     update_post = Post.objects.get(pk=id)
     update_post.title = request.POST['title']
-    update_post.writer = request.POST['writer']
+    update_post.writer = request.user
     update_post.content = request.POST['content']
     update_post.pub_date = timezone.now()
     update_post.weather = request.POST['weather']
@@ -54,10 +54,14 @@ def delete(request, id):
 def create(request):
     new_post = Post()
     new_post.title = request.POST['title']
-    new_post.writer = request.POST['writer']
+    new_post.writer = request.user
     new_post.content = request.POST['content']
     new_post.pub_date = timezone.now()
     new_post.weather = request.POST['weather']
     new_post.image = request.FILES.get('image')
     new_post.save()
     return redirect('main:detail', new_post.id)
+
+def mypage(request):
+    user_posts = Post.objects.filter(writer=request.user)
+    return render(request, 'main/mypage.html', {'user_posts': user_posts})

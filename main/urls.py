@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from .views import *
+from . import views
+
 
 app_name = 'main'
 urlpatterns = [
@@ -11,6 +13,7 @@ urlpatterns = [
     path('<int:id>', detail, name="detail"),
     path('edit/<int:id>', edit, name="edit"),
     path('update/<int:id>', update, name="update"),
-    path('delete/<int:id>', delete, name="delete")
+    path('delete/<int:id>', delete, name="delete"),
+    path('mypage/', views.mypage, name='mypage'),
 
 ]
