@@ -1,0 +1,7 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %} 
+    <h1>마이페이지에 오신 것을 환영합니다</h1>
+    <h3>age : {{user.profile.age}}세</h3>
+    <h3>bio : {{user.profile.bio}}</h3>
+{% endblock %}
