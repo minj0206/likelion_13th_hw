@@ -15,5 +15,7 @@ urlpatterns = [
     path('update/<int:id>', update, name="update"),
     path('delete/<int:id>', delete, name="delete"),
     path('mypage/', views.mypage, name='mypage'),
+    path('tag-list', tag_list, name="tag-list"),
+    path('tag-posts/<int:tag_id>', tag_posts, name="tag-posts"),
 
 ]
